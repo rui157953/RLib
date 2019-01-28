@@ -28,4 +28,24 @@ public class NetworkUtil {
         return NETWORK_STATE;
     }
     
+    /**
+     * 检测当前网络的类型 是否是wifi
+     *
+     * @return 1:wifi or 2:非wifi
+     */
+    @RequiresPermission(android.Manifest.permission.ACCESS_NETWORK_STATE)
+    public static int checkedNetWorkType(Context context) {
+        if (getNetworkState(context) == NETWORK_STATE_UNAVAILABLE) {
+            return 0;//无网络
+        }
+        
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting()) {
+            return 1;//wifi
+            
+        } else {
+            return 2;//非wifi
+        }
+    }
+    
 }
