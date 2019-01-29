@@ -51,8 +51,8 @@ public class FileUtil {
                     return jpegName;
                 }
                 
-                FileOutputStream fout = new FileOutputStream(file);
-                BufferedOutputStream bos = new BufferedOutputStream(fout);
+                FileOutputStream fos = new FileOutputStream(file);
+                BufferedOutputStream bos = new BufferedOutputStream(fos);
                 b.compress(CompressFormat.JPEG, 100, bos);
                 bos.flush();
                 bos.close();
@@ -71,15 +71,15 @@ public class FileUtil {
         }
         
         String pathName = path + File.separator + fileName;
-        FileOutputStream fout = null;
+        FileOutputStream fos = null;
         BufferedOutputStream os = null;
         BufferedInputStream inputStream = null;
         
         try {
             File file = new File(pathName);
             if (!file.exists() || file.length() <= 0L) {
-                fout = new FileOutputStream(file);
-                os = new BufferedOutputStream(fout);
+                fos = new FileOutputStream(file);
+                os = new BufferedOutputStream(fos);
                 inputStream = new BufferedInputStream(is);
                 byte[] b = new byte[5120];
                 
@@ -97,8 +97,8 @@ public class FileUtil {
                     is.close();
                 }
                 
-                if (fout != null) {
-                    fout.close();
+                if (fos != null) {
+                    fos.close();
                 }
                 
                 if (inputStream != null) {

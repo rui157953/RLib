@@ -9,7 +9,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.ryan.rlib.utils.Util;
+import com.ryan.rlib.utils.CodeUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -156,7 +156,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             String time = formatter.format(new Date());
             String fileName = time + ".txt";
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                String path = Util.getAppFilePath(mContext, "Crash");
+                String path = CodeUtil.getAppFilePath(mContext, "Crash");
                 FileOutputStream fos = new FileOutputStream(new File(path, fileName));
                 fos.write(sb.toString().getBytes("UTF-8"));
                 fos.close();

@@ -3,7 +3,13 @@ package com.ryan.rlib.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.support.annotation.RequiresPermission;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
@@ -48,4 +54,43 @@ public class NetworkUtil {
         }
     }
     
+    public static String getIPAddress(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
+        // 判断wifi是否开启
+        int ipAddress = 0;
+        if (wifiManager != null) {
+            if (!wifiManager.isWifiEnabled()) {
+                wifiManager.setWifiEnabled(true);
+            }
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            ipAddress = wifiInfo.getIpAddress();
+            LogUtil.i("ipAddress(int):" + ipAddress);
+            return intToIp(ipAddress);
+        }
+        return null;
+    }
+    
+    public static String getInetIpAddress() {
+        try {
+            Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
+            while (en.hasMoreElements()) {
+                NetworkInterface intf = en.nextElement();
+                Enumeration<InetAddress> ipAddr = intf.getInetAddresses();
+                while (ipAddr.hasMoreElements()) {
+                    InetAddress inetAddress = ipAddr.nextElement();
+                    return inetAddress.getHostAddress();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    
+    private static String intToIp(int i) {
+        return (i & 0xFF) + "." + ((i >> 8) & 0xFF) + "." + ((i >> 16) & 0xFF)
+                + "." + (i >> 24 & 0xFF);
+    }
 }
