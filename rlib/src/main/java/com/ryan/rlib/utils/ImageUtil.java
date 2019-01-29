@@ -15,16 +15,16 @@ public class ImageUtil {
     public static void loadImage(Object object, String url, ImageView imageView) {
         
         RequestManager requestManager;
-        if (object instanceof Context) {
-            requestManager = Glide.with((Context) object);
-        } else if (object instanceof Activity) {
-            requestManager = Glide.with((Activity) object);
+        if (object instanceof View) {
+            requestManager = Glide.with((View) object);
         } else if (object instanceof Fragment) {
             requestManager = Glide.with((Fragment) object);
-        } else if (object instanceof View) {
-            requestManager = Glide.with((View) object);
         } else if (object instanceof FragmentActivity) {
             requestManager = Glide.with((FragmentActivity) object);
+        } else if (object instanceof Activity) {
+            requestManager = Glide.with((Activity) object);
+        } else if (object instanceof Context) {
+            requestManager = Glide.with((Context) object);
         } else {
             throw new IllegalArgumentException("The first param is wrong type of class.");
         }
