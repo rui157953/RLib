@@ -34,5 +34,8 @@ public class ImageUtil {
                 .into(imageView);
     }
     
+    public static void parseImage() {
+    
+    }
     
 }
