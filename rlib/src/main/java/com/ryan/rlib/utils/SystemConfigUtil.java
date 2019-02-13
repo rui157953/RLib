@@ -2,24 +2,14 @@ package com.ryan.rlib.utils;
 
 import android.app.backup.BackupManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.LocationManager;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.LocaleList;
-import android.provider.Settings;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.view.WindowManager;
 
 import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
 import java.util.Locale;
 
 public class SystemConfigUtil {
@@ -117,39 +107,5 @@ public class SystemConfigUtil {
             isOpen = false;
         }
         return isOpen;
-    }
-    
-    /**
-     * 跳转GPS设置
-     */
-    public static void openGPSSettings(final Context context) {
-        if (checkGPSIsOpen(context)) {
-            //            initLocation();
-            //自己写的定位方法
-        } else {
-            // 没有打开则弹出对话框
-            AlertDialog.Builder builder = new AlertDialog.Builder(context/*, R.style.AlertDialogCustom*/);
-            builder.setTitle("温馨提示");
-            builder.setMessage("当前应用需要打开定位功能。请点击\"设置\"-\"定位服务\"打开定位功能。");
-            //设置对话框是可取消的
-            builder.setCancelable(false);
-            builder.setPositiveButton("设置", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();                    //跳转GPS设置界面
-                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    context.startActivity(intent);
-                }
-            });
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-//                    ActivityManager.getInstance().exit();
-                }
-            });
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
-        }
     }
 }
