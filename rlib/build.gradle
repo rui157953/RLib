@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 ext {
     versions = [
@@ -26,6 +27,15 @@ android {
         }
     }
 
+}
+
+uploadArchives{
+    repositories.mavenDeployer{
+        repository(url:LOCAL_REPO_URL)
+        pom.groupId = GROUP_ID
+        pom.artifactId = ARTIFACTID
+        pom.version = LIBRARY_VERSION
+    }
 }
 
 dependencies {
