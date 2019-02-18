@@ -44,9 +44,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation("com.github.bumptech.glide:glide:${versions.glide}")
-    implementation("com.squareup.retrofit2:retrofit:${versions.retrofit}")
-    implementation("com.squareup.retrofit2:converter-gson:${versions.retrofit}")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}")
-    implementation("io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}")
-    implementation("com.squareup.okhttp3:logging-interceptor:3.5.0")
+    api("com.squareup.retrofit2:retrofit:${versions.retrofit}")
+    api("com.squareup.retrofit2:converter-gson:${versions.retrofit}")
+    api("com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}")
+    api("io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}")
+    api("com.squareup.okhttp3:logging-interceptor:3.5.0")
 }
